@@ -5,7 +5,7 @@
 \setlength{\headheight}{15pt}
 \setlength{\headsep}{15pt}
 \renewcommand{\headrulewidth}{0.4pt}
-\lhead{}
+\lhead{Problem 3-6}
 \chead{}
 \rhead{Nisha Masharani (nisham)}
 \lfoot{}
@@ -15,15 +15,52 @@
 
 
 \begin{center}
-{\Large CS161 Homework 3 Problem 3-1}
+{\Large CS161 Homework 3 Problem 3-6}
 
 \end{center}
 
-\section*{(1)}
-
 \begin{enumerate}[label=(\alph*)]
-  \item (your solution)
-  \item (your solution)
+  \item 
+  \begin{eqnarray*}
+  X_i &=& \text{the number of probes required for the ith insertion}\\
+  A_j &=& \left\{\begin{array}{ll}1  & \mbox{if } j\text{th slot is occupied} \\ 0 & \text{otherwise}\end{array}\right.\\
+  \Pr(A_j = 1) &=& \frac{i-1}{m}\\
+  \Pr(X_i = k) &=& \left( \frac{i-1}{m} \right)^{k-1}\left( 1 - \frac{i-1}{m} \right)\\
+  \Pr(X_i > k) &=& 1 - \Pr(X_i \le k)\\
+  &=& 1 - \sum_{j = 1}^k \left( \frac{i-1}{m} \right)^{j-1}\left( 1 - \frac{i-1}{m} \right)\\
+   &=& 1 - \left(1 -\left( \frac{i-1}{m} \right)^{k}\right)\\
+   &=& \left( \frac{i-1}{m} \right)^{k}\\
+   &\le& \left( \frac{n-1}{m} \right)^{k}\\
+   &\le& \left( \frac{(m/2)-1}{m} \right)^{k}\\
+   &=& \left( \frac{m-2}{2m} \right)^{k}\\
+   &\le& \left( \frac{m}{2m} \right)^{k}\\
+   &=& \left( \frac{1}{2} \right)^{k}\\
+  \end{eqnarray*}
+  Thus, $\Pr(X_i > k) \le \left( \frac{1}{2} \right)^{k}$.
+  \item From part a, we have $P(X_i > k) \le \left( \frac{1}{2} \right)^{k}$. Plug in $k = 2\log n$ and we get:
+  \begin{eqnarray*}
+  \Pr(X_i > k) &\le& \left( \frac{1}{2} \right)^{k}\\
+  \Pr(X_i > 2\log n) &\le& \left( \frac{1}{2} \right)^{2\log n}\\
+  &=& 2^{-2\log n}\\
+  &=& 2^{\log {n^{-2}}}\\
+  &=& n^{-2}\\
+  \end{eqnarray*}
+  Thus, we have that $\frac{1}{n^2}$ is an upper bound for $P(X_i > 2\log n)$, so $P(X_i > 2\log n) = O\left(\frac{1}{n^2}\right)$
+  \item
+  \begin{eqnarray*}
+  \Pr(X > k) &=& \Pr(X_1 > k) \text{or} \Pr(X_2 > k) \text{or} \Pr(X_3 > k) \text{or} ... \text{or} \Pr(X_n > k)\\
+  &=& \Pr(X_1 > k) + \Pr(X_2 > k) + \Pr(X_3 > k) + ... + \Pr(X_n > k)\\
+  &=& \sum_{i=1}^n \Pr(X_i > k)\\
+  \end{eqnarray*}
+  In this case, $k = 2\log n$, so we have:
+  \begin{eqnarray*}
+  \Pr(X > 2\log n) &=& \sum_{i=1}^n \Pr(X_i > 2\log n)\\
+  &\le& \sum_{i=1}^n \frac{1}{n^2}\\
+  &=& n \left(\frac{1}{n^2}\right)\\
+  &=& \frac{1}{n}\\
+  \end{eqnarray*}
+  Thus, $\frac{1}{n}$ is an upper bound for $\Pr(X > 2\log n)$, so $\Pr(X > 2\log n) = O\left(\frac{1}{n}\right)$.
+  \item TODO
 \end{enumerate}
 
 \end{document}
