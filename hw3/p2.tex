@@ -1,0 +1,42 @@
+\documentclass[12pt]{article}
+\usepackage{fullpage,enumitem,amsmath,amssymb,graphicx}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\setlength{\headheight}{15pt}
+\setlength{\headsep}{15pt}
+\renewcommand{\headrulewidth}{0.4pt}
+\lhead{Problem 3-2}
+\chead{}
+\rhead{Nisha Masharani (nisham)}
+\lfoot{}
+\cfoot{}
+\rfoot{}
+\begin{document}
+
+
+\begin{center}
+{\Large CS161 Homework 3 Problem 3-2}
+
+\end{center}
+
+Let $X_i  = \left\{\begin{array}{ll}1  & \mbox{if } i\text{th candidate hired} \\ 0 & \text{otherwise}\end{array}\right.$. $\Pr(X_i = 1) = \frac{1}{i}$, because any of the first $i$ candidates is equally likely to be the best. Thus, the chance that the $i$th of the first $i$ candidates is the best is $\frac{1}{i}$. Therefore:
+
+\begin{eqnarray*}
+\Pr(\text{Hire exactly one time}) &=& \Pr(\text{The first candidate is the best})\\
+&=& \Pr(X_1 = 1, X_2 = 0, X_3 = 0, ..., X_n = 0)\\
+&=& (\frac{1}{1}) (1 - \frac{1}{2}) (1 - \frac{1}{3}) ...  (1 - \frac{1}{n})\\
+&=& (\frac{1}{1}) (\frac{1}{2}) (\frac{2}{3}) ...  (\frac{n-1}{n})\\
+&=& \frac{(n-1)!}{n!}\\
+&=& \frac{1}{n}\\
+\end{eqnarray*}
+This makes sense because the best candidate of all is equally likely to be at any position in the list. The chance that the best candidate is at the first position is therefore $\frac{1}{n}$. 
+
+\begin{eqnarray*}
+\Pr(\text{Hire exactly n times}) &=& \Pr(\text{Each candidate is better than the last})\\
+&=& \Pr(X_1 = 1, X_2 = 1, X_3 = 1, ..., X_n = 1)\\
+&=& (\frac{1}{1}) (\frac{1}{2}) (\frac{1}{3}) ...  (\frac{1}{n})\\
+&=& \frac{1}{n!}\\
+\end{eqnarray*}
+This also makes sense because there are $n!$ possible orderings of the $n$ candidates, and out of those orderings, only 1 of those orderings is such that each candidate is better than the last. 
+
+\end{document}
