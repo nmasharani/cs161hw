@@ -1,4 +1,4 @@
-PWD /Users/nmasharani/Documents/College/Junior/1-Fall/CS161/hw3
+PWD /Users/nmasharani/Documents/College/Junior/1-Fall/CS161/cs161hw/hw3
 INPUT /usr/local/texlive/2013basic/texmf.cnf
 INPUT /usr/local/texlive/2013basic/texmf-dist/web2c/texmf.cnf
 INPUT /usr/local/texlive/2013basic/texmf-var/web2c/xetex/xelatex.fmt
@@ -67,4 +67,5 @@ INPUT /usr/local/texlive/2013basic/texmf-dist/tex/latex/amsfonts/umsb.fd
 INPUT /usr/local/texlive/2013basic/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT /usr/local/texlive/2013basic/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT /usr/local/texlive/2013basic/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
+INPUT /usr/local/texlive/2013basic/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
 INPUT p4.aux

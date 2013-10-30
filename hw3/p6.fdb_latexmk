@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1382947793 "p6.tex" "p6.pdf" "p6" 1382947793
+["pdflatex"] 1383115885 "p6.tex" "p6.pdf" "p6" 1383115885
   "/usr/local/texlive/2013basic/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2013basic/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
   "/usr/local/texlive/2013basic/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm" 1246382020 916 f87d7c45f9c908e672703b83b72241a3 ""
@@ -40,8 +40,8 @@
   "/usr/local/texlive/2013basic/texmf-dist/web2c/texmf.cnf" 1366045088 31707 0953c15448e216a6585e92ee639d2dc2 ""
   "/usr/local/texlive/2013basic/texmf-var/web2c/xetex/xelatex.fmt" 1377317445 2782306 89ca628b5a54c397b5387a6e06a7cc06 ""
   "/usr/local/texlive/2013basic/texmf.cnf" 1372879202 628 250344c2f334bf49f6f97c90bd54f50e ""
-  "p6.aux" 1382947793 8 a94a2480d3289e625eea47cd1b285758 ""
-  "p6.tex" 1382947792 2430 2a5cc97217d98db84bc76abfe266d907 ""
+  "p6.aux" 1383115885 8 a94a2480d3289e625eea47cd1b285758 ""
+  "p6.tex" 1383115884 3055 03f7d780a95728b70ab88d3858bb273b ""
   (generated)
   "p6.log"
   "p6.pdf"

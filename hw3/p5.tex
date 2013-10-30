@@ -19,11 +19,10 @@
 
 \end{center}
 
-\section*{(1)}
-
-\begin{enumerate}[label=(\alph*)]
-  \item (your solution)
-  \item (your solution)
-\end{enumerate}
-
+By contradiction, let us assume that there exists some data structure $D$ such that INSERT and EXTRACT\_MAX both run in $o(\log n)$ time. Let $A$ be an array of the arbitrary data type that we would like to sort. Follow this sorting algorithm:\\
+\textbf{Algorithm:} For each element in $A$, add $A$ to data structure $D$. 
+Then, while $D$ has a root, starting with the last index in $A$, extract the max and put it at the index in $A$. Then, decrement the index. \\
+\textbf{Correctness:} We can prove correctness of this algorithm by contradiction. Assume that the resulting $A$ is not sorted correctly. That means that there exists an element at index $i$ in $A$ such that $A[i-1] > A[i]$. However, this cannot happen, because $A[i]$ was extracted from $D$ before $A[i-1]$, and $A[i]$ was by definition the max element in $D$ when it was extracted. Thus, we have reached a contradiction, so our algorithm must be correct.\\
+\textbf{Running time:} We will now prove the running time of this algorithm. Each insert runs in $o(\log k)$, where $k$ is the number of elements in $D$ at the time of insertion. Since $k \le n$, and we do $n$ inserts, so we can say that putting all elements from $A$ into $D$ runs in $o(n \log k) < o(n \log n)$ time. Then, we are extracting $n$ elements from $D$ and putting them into $A$. Each extraction runs in $o(\log k)$ time, where $k$ is the number of elements in $D$ at the time of extraction. Therefore, we can say that extracting all elements from $D$ runs in $o(n \log k) < o(n \log n)$ time. (Note that we are assuming that assigning an element in A takes constant time.) Therefore, this entire algorithm runs in $2o(n \log n) = o(n \log n)$ time.\\ 
+However, this cannot be true, because in Lecture 9, we proved that comparison only sorts have a run time lower bounded by $\Omega(n \log n)$, and any function that is $o(n \log n)$ is not $\Omega(n \log n)$. To see this, we can look at the definitions of $\Omega(n \log n)$ and $o(n \log n)$. For any algorithm to be $\Omega(n \log n)$, there exists some constant $c$ such that the run time for large n is greater than $cn \log n$. For any algoritm to be $o(n \log n)$, for all constants $c$, the run time for large n is less than $cn \log n$. Therefore, an algorithm cannot be both $\Omega(n \log n)$ and $o(n \log n)$. Thus, we have reached a contradiction, and our original assumption that such a data structure exists must be incorrect. 
 \end{document}

@@ -60,7 +60,19 @@
   &=& \frac{1}{n}\\
   \end{eqnarray*}
   Thus, $\frac{1}{n}$ is an upper bound for $\Pr(X > 2\log n)$, so $\Pr(X > 2\log n) = O\left(\frac{1}{n}\right)$.
-  \item TODO
+  \item We know $\Pr(X > 2\log n) = \frac{c}{n}$, where $c$ is some constant. That means $\Pr(X <= 2\log n) = 1 - \frac{c}{n}$.
+  \begin{eqnarray*} 
+  E[X] &=& \sum_x x\Pr(X = x)\\
+  &\le& \left(\max_{x > 2\log n} x\right) \frac{c}{n} + \sum_{x <= 2\log n} x\Pr(X = x)\\
+  &\le& \left(\max_{x > 2\log n} x\right) \frac{c}{n} + \left(\max_{x <= 2\log n} x\right) \left(1 -\frac{c}{n}\right) \\
+  &=& n \frac{c}{n} + (2 \log n)\left(1 -\frac{c}{n}\right)\\
+  &=& n \frac{c}{n} + (2 \log n)\left(\frac{n-c}{n}\right)\\
+  &=& c + (2 \log n)\left(\frac{n-c}{n}\right)\\
+  &\le& c + (2 \log n)\\
+  \end{eqnarray*}
+
+  Thus, $E[X] = O(\log n)$.
+
 \end{enumerate}
 
 \end{document}
