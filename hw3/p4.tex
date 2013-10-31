@@ -32,6 +32,7 @@ For the inductive step, we will show that, if $A[i-1]$ is in the correct positio
 In both cases, we see that the elements remain in correctly sorted order as elements are appended. Therefore, the resulting list must be in sorted order.
 
 \section*{Running Time}
+The size of $H$ is at most $k$. Since $H$ is a standard min-heap, both INSERT and EXTRACT\_MAX run in $O(\log k)$ time. Since we insert all $n$ elements into $H$, the total insertions into the heap run in $O(n\log k)$ time, and iterating through the elements runs in $O(n)$ time, so the total time to insert all elements into $H$ is $O(n\log k)$. Similarly, since we extract all $n$ elements from $H$, the total extractions from $H$ also run in $O(n\log k)$ time, and putting the elements into the resulting array runs in $O(n)$ time, meaning the whole extraction step runs in $O(n\log k)$ time. Thus, the total run time for the algorithm is $2O(n\log k) = O(n \log k)$.
 
 \end{document}
 

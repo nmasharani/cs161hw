@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.1415926-2.5-0.9999.3 (TeX Live 2013) (format=xelatex 2013.8.23)  30 OCT 2013 01:17
+This is XeTeX, Version 3.1415926-2.5-0.9999.3 (TeX Live 2013) (format=xelatex 2013.8.23)  30 OCT 2013 20:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -173,6 +173,6 @@ Here is how much of TeX's memory you used:
  5103 multiletter control sequences out of 15000+600000
  9198 words of font info for 35 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 27i,10n,43p,735b,194s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 27i,10n,43p,735b,196s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 Output written on p4.pdf (2 pages).
