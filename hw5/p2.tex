@@ -1,0 +1,40 @@
+\documentclass[12pt]{article}
+\usepackage{fullpage,enumitem,amsmath,amssymb,graphicx}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\setlength{\headheight}{15pt}
+\setlength{\headsep}{15pt}
+\renewcommand{\headrulewidth}{0.4pt}
+\lhead{}
+\chead{}
+\rhead{Nisha Masharani (nisham)}
+\lfoot{}
+\cfoot{}
+\rfoot{}
+\begin{document}
+
+
+\begin{center}
+{\Large CS161 Homework 5 Problem 5-2}
+
+\end{center}
+
+\section*{(1)}
+We can use a cut and paste approach to prove that $G'$ is connected. Let $T_3 = (V, F_3)$ and $T_4 = (V, F_4)$ be nodes in $G'$, and let $S = F_4-F_3$ be the set of all edges that are in $T_4$ but not in $T_3$. Let us use the following cut and paste approach: \\
+Remove an edge $uv$ from $T_3$ where $uv \notin F_4$. Removing this edge will give us two distinct "blobs", $A$ and $B$. $A$ and $B$ cannot be connected because there are no parallel edges in $T_3$, because there are no cycles in a spanning tree (proved Lecture 15 p172). Since $T_4$ is also a valid spanning tree, there must be an edge $u'v'$ in $S$ that connects a node $m \in A$ and $n \in B$, because there must be a subtree of $T_4$ that contains the same nodes as $A$ and another subtree that contains the same nodes as $B$, because $A + B = V$. Therefore, we can replace $uv$ with $u'v'$ and still have a valid spanning tree. Therefore, this new spanning tree, $T_3'$, must also be in $G'$. $T_3'$ only differs from $T_3$ by one edge, so there must be an edge $K$ in $G'$ from $T_3$ to $T_3'$.\\
+We can repeat this cut and paste routine on $T_3'$ with all of the edges in $S$ until $S$ is empty. We know that the edge $K$ will exist for all iterations of cut and paste, so the set of all $K$s is the path from $T_3$ to $T_4$. Since we repeat this routine $|T_4-T_3|$ times, the number of $K$s in that set must also be $|T_4-T_3|$.
+
+\section*{(2)}
+\subsection*{Algorithm}
+Use a modified version of Prim's algorithm. To start, pick a node $v$ and add it to an empty set $A$. Add all edges outgoing from $v$ to a min-heap $h$ which stores the edges by weight. Then, repeat the following procedure until all nodes are in $A$:\\
+Extract the minimum weight edge $e$ from $h$. If $e$ is internal, meaning both nodes at the ends of $e$ are in $A$ repeat the extraction until a non-internal edge is extracted. Then, add $e$ to our spanning tree $T$, which maintains the edges in the order that they were added (an array of edges), and add the node external to $A$ at the end of $e$ to $A$. Continue extracting edges from $h$ until we extract the first edge $f$ that is outgoing that is a different color from $e$, and store that edge in a seperate ordered list, $S$. If no such edge is found, store a marker to indicate that no such edge exists.\\
+Then, count the number of blue edges $b$ in $T$. If $b \ne k$, let us examine the cases:\\
+\textbf{Case 1:} $b > k$. In this case, we need to remove blue edges from $T$. Iterate through $T$ until we find the first blue edge, and replace it with the red edge at the same index in $S$, if it exists, and decrement b. Continue until $b = k$. If we get to the end of $T$ and we have been unable to replace all of the edges, then such a spanning tree does not exist.\\
+\textbf{Case 2:} $b < k$. In this case, we need to add blue edges to $T$. Similarly to case 1, iterate through $T$ and replace red edges with the corresponding blue edges in $S$, and increment $b$ whenever we replace an edge, until $b = k$ or we reach the end of the list.\\
+
+\subsection*{Correctness}
+We know that Prim's algorithm will give us a valid spanning tree, so we now have to prove that our replacement step works. At any point in time, we have a set $A$ of nodes that we have already connected, and the remaining nodes $V-A$ which we have not yet connected. Assuming $G$ is fully connected, we are guaranteed to find at least one edge $e$ connecting $A$ and $V-A$. Since we continue to extract edges until we find an outgoing edge of the opposite color or until the heap is empty, we are guaranteed to find an edge of the opposite color $f$ connecting $A$ and $V-A$ if it exists. From our cut and paste routine defined in part 1, we know that if we have $e$ connecting $A$ and $V-A$, and we remove $e$ and replace it with $f$, we still have a valid spanning tree. Therefore, at every step, we can replace $e$ with an edge of the opposite color connecting $A$ and $V-A$, $f$, and still have a valid spanning tree. Also from part 1, we know that we can do multiple replacements and still have a valid spanning tree, because at each step of the replacements, we have a valid spanning tree. Therefore, if we replace multiple $e$s with multiple $f$s, we still have a valid spanning tree. Now, we must show that if we cannot replace enough edges to get a graph with $k$ blue edges, there is no possible spanning tree with $k$ blue edges. We know that, if there exist edges of the opposite color connecting $A$ to $V-A$, we find them, because we go through the entire heap. We also know that, if we discard an edge that we look at in the heap, then it's an internal edge, meaning we've already checked all edges that were outgoing at the time that edge was outgoing, meaning that we found an edge that was of the opposite color at that time. Therefore, if we do not find enough edges of the opposite color, then there cannot be a spanning tree, because we have checked all edges in G for edges of the opposite color, and have not found any possible edges.
+
+\subsection*{Running time}
+We add all edges to the heap exactly once and remove each edge at most once. The heap is of size $O(V)$, so each insert and extract min takes $O(\log V)$ time. Therefore, the total running time of finding the initial spanning tree is $O(E \log V)$ for insertions and $O(E \log V)$ for extractions, so the total running time of finding the initial spanning tree is $O(E \log V)$. Then, we iterate through $T$, which is of length $V-1$, and count the number of blue edges, which is $\Theta(V)$. We then perform the replace operation by iterating through $T$ once more and performing constant time array access and element exchanges, which is also $\Theta(V)$. Therefore, our total running time is $O(V + E \log V)$ which is $O(E \log V)$.
+\end{document}

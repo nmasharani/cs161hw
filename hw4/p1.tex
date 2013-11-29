@@ -1,0 +1,29 @@
+\documentclass[12pt]{article}
+\usepackage{fullpage,enumitem,amsmath,amssymb,graphicx}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\setlength{\headheight}{15pt}
+\setlength{\headsep}{15pt}
+\renewcommand{\headrulewidth}{0.4pt}
+\lhead{}
+\chead{}
+\rhead{Nisha Masharani (nisham)}
+\lfoot{}
+\cfoot{}
+\rfoot{}
+\begin{document}
+
+
+\begin{center}
+{\Large CS161 Homework 4 Problem 4-1}
+
+\end{center}
+Let us consider the following tree:
+\begin{verbatim}
+            10
+     5               15
+ 3       7       13      17
+1 4     6 8    11  14  16  18
+\end{verbatim}
+Let us binary search in this tree for the value 11. In this case, our path will go through the following nodes: $10, 15, 13, 11$. Thus, $B = \{10, 15, 13, 11\}$. All of the nodes to the left of the path are $A = \{5, 3, 7, 1, 4, 6, 8\}$. All of the nodes to the right of the path are $C = \{14, 16, 17, 18\}$. We had claimed that for any keys $b \in B$ and $c \in C$, $b \le c$, but from this example, we can see that $15 \in B$ and $14 \in C$, so this claim cannot be true. 
+\end{document}
