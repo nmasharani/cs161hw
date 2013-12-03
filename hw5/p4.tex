@@ -19,27 +19,19 @@
 
 \end{center}
 
-\section*{(1)}
+\section*{Algorithm}
+Let us use dynamic programming. Our subproblem is the maximum total fun rating for a subtree if the root of that tree is included, and if the root of that tree is not included. To calculate this subproblem, we must store two values for each node in that subtree. The first value, $C(i)$, is the maximum weight when the $i$th employee is invited. The second value, $D(i)$, is the maximum weight when the $i$th employee is not invited. Mathematically, $C(i) = \sum_{x \in Children(i)} D(x)$ and $D(i) \sum_{x \in Children(i)} max(C(x), D(x))$. In the case that the $i$th employee is not invited, the children of that node may or may not be included in order to get the maximum total fun rating. 
 
-Dynamic programming.
+To get $C(root)$ and $D(root)$, we must first calculate $C$ and $D$ for all subtrees. To do this, set the root to be the current node, and iterate through all children of the root. Set each of those children in turn to be the current node, and recursively visit all of those children. Upon reaching a node $n$ with no children, which is the base case, set $C(n) = Fun(n)$, where $Fun(n)$ is the fun rating of node $n$, and set $D(n) = 0$, and store the $C$ and $D$ values in a near-constant-time access data structure, such as a hashmap indexed by employee name. Once all of the children for the current node have had their $C$ and $D$ values calculated recursively, calculate the $C$ and $D$ values of the current node using the formulas for $C(i)$ and $D(i)$ described above. Once this has been done for all nodes in the tree, the recursion will return back to the root. Upon reaching the root, take the maximum over $C(root)$ and $D(root)$, and return that as the fun rating as the maximum fun rating over the entire tree.
 
-For each node in a level, the max weight is either the node, or the sum of the child nodes of that node. 
+\section*{Correctness}
+We need to prove that $C(i)$ and $D(i)$ correctly give the maximum fun ratings for a subtree including and not including node i, respectively. We will do so by induction.\\
+\textbf{Base case:} Node $i$ has no children. In this case, $C(i) = Fun(i)$ and $D(i) = 0$.\\
+\textbf{Inductive step:} Assume that $C(x)$ and $D(x)$ for all $x \in Children(i)$ correctly return the maximum fun ratings for all children of $i$. By our formulas, we have $C(i) = \sum_{x \in Children(i)} D(x)$ and $D(i) \sum_{x \in Children(i)} max(C(x), D(x))$.\\
+\textbf{Case 1:} $C(i)$ is the maximum fun rating if node $i$ is included, so if node $i$ is included, none of $i$'s children can be included, so the maximum fun rating must be the sum of $D(x)$ all children $x$. Since all $D(x)$ are correct, $C(i)$ must also be correct.\\
+\textbf{Case 2:} $D(i)$ is the maximum fun rating if node $i$ is not included. In this case, all of child nodes of $i$ can be included, but do not need to be included. Therefore, $D(i)$ should be the sum of the maximum of $C(x)$, $D(x)$ for all children $x$ of node $i$.\\
+In both cases, $C(i)$ and $D(i)$ are calculated correctly. Therefore, for all nodes, $C(i)$ and $D(i)$ are correct, so it is correct to find the maximum fun rating for the entire tree by simply taking the maximum of the ratings for the root.\\
 
-			6
-		4 		7
-	11	  2   3   1
-
-
-parent + 2 children > current
-
-11, 2, 3, 1, 6
-
-			6
-		4 	   100
-	11	  2   3   1
-
-11, 2, 100
-
-
-
+\section*{Running time}
+We look at each node in the tree twice: once to examine all of its children, when iterating downwards recursively, and once to calculate the $C$ and $D$ values for that node from its children. Therefore, visiting all of the nodes takes $\Theta(n)$ time. Accessing the $C$ and $D$ values once calculated takes constant time. Calculating the $C$ and $D$ values for all nodes takes at most linear time, because there are $n$ $C$ values and $n$ $D$ values over which we must sum, and each value is accessed in constant time. Therefore, the total running time for this algorithm is $\Theta(n)$.
 \end{document}

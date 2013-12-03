@@ -21,13 +21,22 @@
 
 \section*{Algorithm}
 
-Assume that the requests are grouped by the player making the request. Let us create an $n \times n$ adjacency matrix $A$ of integers representing our graph, and initialize all values in $A$ to 1. Iterate through the players and examine their requests as follows:\\ 
-For player $i$, if player $i$ requests to be on the same team as player $j$, set $A(i, j) = 0$.\\
-For player $i$, if player $i$ request to not be on the same team as player $j$, set $A(i, j) = \infty$.\\
-Then, let us perform a modified version of DFS on that adjacency matrix. Starting with the first player, iterate through the players. Let $u$ be the current player.\\
-\textbf{Case 1:} If $u$ is uncolored or pink, color $u$ pink. Iterate through all of the edges $uv$ going out of $u$, and all edges $vu$ coming into $u$ where $v$ is uncolored. If the weight of $uv$ or $vu$ is 0, color $v$ pink, and search all edges outgoing from $v$ in the same way, coloring the nodes red when the search from that node is complete. If the weight of $uv$ or $vu$ is $\infty$, color $v$ blue, and do not search further. If the weight of both $uv$ and $vu$ is 1, color $v$ grey, and keep searching out from $v$, coloring nodes grey along the way. If we are at a node $v$ that has an outgoing edge with weight infinity, if it is a back edge to a node colored grey or pink, color $v$ blue and stop the search there, coloring all previous nodes red.\\
-\textbf{Case 2:} If $u$ is blue, iterate through all of the edges $uv$ going out of $u$, and all edges $vu$ coming into $u$. If the weight of $uv$ or $vu$ is 0, color $v$ blue, and search all neighbors of $v$. If the weight of $uv$ or $vu$ is $\infty$, color $v$ pink, and do not search $v$. If the weight of $uv$ or $vu$ is 1, do not search or color $v$.\\
-\textbf{Case 3:} If $u$ is red, there is no need to search $u$ further.\\
+Assume the requests are grouped by the player making the request. Let us create an adjacency list representing our graph. Iterate through the players and examine their requests as follows:\\ 
+For player $i$, if player $i$ requests to be on the same team as player $j$, create an edge of weight $0$ from player $i$ to $j$.\\
+For player $i$, if player $i$ request to not be on the same team as player $j$, create an edge of weight $2$ from player $i$ to $j$\\
+Let us then perform a modified version of DFS on this graph, using the colors red and blue to assign teams. Starting with the first player, iterate through the players. Let $u$ be the current player.\\
+\textbf{If $u$ is uncolored, color $u$ red. Search all of the edges $uv$ coming out of $u$.}\\
+\textbf{Case 1:} If the weight of $uv$ is $0$, color $v$ red and recursively search all edges coming out of $v$.\\
+\textbf{Case 2:} If the weight of $uv$ is $2$, color $v$ blue and search all edges coming out of $v$ as described for blue nodes below.\\
+\textbf{If $u$ has been colored blue, follow the following proceduce for all neighbors of $u$:}\\
+\textbf{Case 3:} If the weight of $uv$ is $0$, color $v$ blue and recursively search all edges coming out of $v$.\\
+\textbf{Case 4:} If the weight of $uv$ is $2$, color $v$ red and search all edges coming out of $v$ as described for red nodes above.\\
+Upon completion, assign all of the red nodes to team $0$, and all of the blue nodes to team $1$. 
 
+\section*{Correctness}
+% Write out more cases
+By contradiction. Without loss of generality, assume two nodes are both colored red, but that the two nodes have an edge with weight 2 between them. Let $u$ be the node that was colored first and $v$ be the node that was colored second. $v$ must be a neighbor of $u$, so we must have explored $v$ when exploring the neighbors of $u$. When we explore the neighbors of $u$, we only color a node $w$ red if the weight of the edge $uw$ is 0. If node $v$ is red, it must have been colored during the recursive search of node $w$, meaning that there must be a series of edges between $v$ and $w$ that are all weight 0, meaning that all of those people want to be on the same team. However, the requests that we are given must be valid, and this would be an invalid request. Therefore, we have reached a contradiction and this situation can never occur with valid requests. This proof works similarly with nodes have edges of weight 0 between them, or with nodes that are colored blue.
 
+\section*{Running Time}
+Iterating through the requests and filling the adjacency list takes $\Theta(k)$ time. Then, we iterate through the nodes, and color all uncolored nodes, which takes $\Theta(n)$. We also traverse all edges, taking $\Theta(k)$ time. Therefore, the total running time of the algorithm is $\Theta(n + k)$.
 \end{document}
